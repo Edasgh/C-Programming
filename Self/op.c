@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define PI 3.14 // This is a constant
 // gcc op.c -o op
+// .\op.exe
 
 float takeValue() // the function to take value to convert
 {
@@ -74,11 +75,26 @@ int fib_iterative(int n)
     }
     for (i = 2; i <= n; i++)
     {
-        c = a + b;
+        c = a + b; // at 2, c=0+1=1; a=1; b=1; | at 3, c=1+1=2; a=1; b=2; | at 4, c=1+2=3; a=2; b=3;|at 5, c=2+3=5; a=3; b=5;|at 6, c=3+5=8; a=5; b=8 and so on
         a = b;
         b = c;
     }
     return b;
+}
+
+int fib_iter(int n)
+{
+    int a = 0;
+    int b = 1;
+
+    for (int i = 0; i < n-1; i++)
+    {
+        b = a+b; //1 for iteration 1
+        a = b-a; //1 for iteration 1
+
+    }
+    
+    return a;
 }
 void main()
 {
@@ -106,9 +122,10 @@ void main()
     // recursive function: fib_recursive
     // iterative function: fib_iterative
     int num, fib_val;
-    printf("Enter a number to see fibonacci value of\n");
+    printf("Enter a number to see fibonacci value of (index starts from 0)\n");
     scanf("%d", &num);
     // fib_val=fib_recursive(num);
-    fib_val = fib_iterative(num);
-    printf("The %dth fibonacci number is %d", num, fib_val);
+    // fib_val = fib_iterative(num);
+    printf("The %dth fibonacci number (index starts from 0) via iterative approach is %d\n", num,fib_iterative(num));
+    printf("The %dth fibonacci number (index starts from 0) via recursive approach is %d\n", num,fib_recursive(num));
 }
