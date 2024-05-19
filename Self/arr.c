@@ -2,6 +2,23 @@
 // gcc arr.c -o arr
 // .\arr.exe
 
+//function to reverse an array | Ex-5
+void arrayRev(int arr[])
+{
+ int arr2[8];
+ for (int i = 0; i <8; i++)
+ {
+   arr2[i]=arr[7-i];
+
+ }
+ for(int j=0;j<8;j++)
+ {
+    arr[j]=arr2[j];
+ }
+
+
+ 
+}
 //function of average
 int avg(int array[])
 {
@@ -15,6 +32,16 @@ int avg(int array[])
     // array[0]=465; // if user changes any value here, it gets reflected in the original array
     return avg;
 }
+int printVal(int *ptr)
+{
+    for(int i=0;i<8;i++)
+    {
+        // printf("The value at %d is %d\n",i,ptr[i]);
+        printf("The value at %d is %d\n",i,*(ptr+i));
+        
+    }
+    return 0;
+}
 int sum(int *ptr)
 {
     for(int i=0;i<5;i++)
@@ -23,7 +50,6 @@ int sum(int *ptr)
         printf("The value at %d is %d\n",i,*(ptr+i));
         
     }
-    *(ptr+2)=456;
     return 0;
 }
 //a function which takes multidimensional array as parameter
@@ -75,7 +101,7 @@ void main()
 
 
     //Passing array as an argument to function
-    int arr[]={23,34,45,60,90};
+    // int arr[]={23,34,45,60,90};
     // printf("The value at index 0 is %d\n",arr[0]);
     // int average;
     // average=avg(arr);
@@ -88,7 +114,19 @@ void main()
 //  sum(arr);
 
 //Passing multidimensional array as argument/parameter
-int arr2[2][2]={{23,34},{0,1}};
-func(arr2);
+// int arr2[2][2]={{23,34},{0,1}};
+// func(arr2);
+
+
+
+
+//Ex-5 : Array Reversal In C
+int arr[]={1,2,4,7,8,68,78,90};
+printVal(arr);
+arrayRev(arr);
+printf("The reversed array is: \n");
+printVal(arr);
+
+
 
 }
