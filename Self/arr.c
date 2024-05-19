@@ -1,5 +1,44 @@
 #include <stdio.h>
 // gcc arr.c -o arr
+// .\arr.exe
+
+//function of average
+int avg(int array[])
+{
+    int sum,avg;
+    for(int i=0;i<5;i++)
+    {
+        printf("The value at %d is %d\n",i,array[i]);
+        sum=sum+array[i];
+    }
+    avg=sum/5;
+    // array[0]=465; // if user changes any value here, it gets reflected in the original array
+    return avg;
+}
+int sum(int *ptr)
+{
+    for(int i=0;i<5;i++)
+    {
+        // printf("The value at %d is %d\n",i,ptr[i]);
+        printf("The value at %d is %d\n",i,*(ptr+i));
+        
+    }
+    *(ptr+2)=456;
+    return 0;
+}
+//a function which takes multidimensional array as parameter
+void func(int arr[2][2])
+{
+     for(int i=0;i<2;i++)
+    {
+        for(int j=0;j<2;j++)
+    {
+         printf("The value at %d, %d is %d\n",i,j,arr[i][j]);
+        
+    }
+        
+    }
+}
 void main()
 {
     // int marks[4]={4,53,29,45}; // initialization with decalration // 1d array
@@ -22,14 +61,34 @@ void main()
     // }
 
     // 2d array
-    int marks[2][4] = {{45, 68, 89, 90}, {89, 88, 45, 60}}; // 2-rows, 4-columns
-    for (int i = 0; i < 2; i++) // now the array will be prnted as a matrix
-    {
-        for (int j = 0; j < 4; j++)
-        {
-            // printf("The value of element of the %dth row and %dth column of the array is %d\n", i, j, marks[i][j]);
-            printf("%d ",marks[i][j]);
-        }
-        printf("\n");
-    }
+    // int marks[2][4] = {{45, 68, 89, 90}, {89, 88, 45, 60}}; // 2-rows, 4-columns
+    // for (int i = 0; i < 2; i++) // now the array will be prnted as a matrix
+    // {
+    //     for (int j = 0; j < 4; j++)
+    //     {
+    //         // printf("The value of element of the %dth row and %dth column of the array is %d\n", i, j, marks[i][j]);
+    //         printf("%d ",marks[i][j]);
+    //     }
+    //     printf("\n");
+    // }
+
+
+
+    //Passing array as an argument to function
+    int arr[]={23,34,45,60,90};
+    // printf("The value at index 0 is %d\n",arr[0]);
+    // int average;
+    // average=avg(arr);
+    // printf("The average is, %d\n",average);
+    // printf("The value at index 0 is %d\n",arr[0]);
+
+
+ //Now passing the address of an array as parameter to a function
+//  sum(arr);
+//  sum(arr);
+
+//Passing multidimensional array as argument/parameter
+int arr2[2][2]={{23,34},{0,1}};
+func(arr2);
+
 }
