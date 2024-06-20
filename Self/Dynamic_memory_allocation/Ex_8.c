@@ -28,7 +28,7 @@ int main()
     restart:
         printf("Enter the length of Employee id of Emp.%d : \n", i + 1);
         scanf("%d", &n);
-        ptr = (char *)malloc((n + 1) * sizeof(char));
+        ptr = (char *)malloc((n + 1) * sizeof(char)); //n is for the employee id and 1 more for the null character : \0
 
         printf("Enter your Emp. Id :");
         scanf("%s", ptr);
