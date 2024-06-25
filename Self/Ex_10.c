@@ -77,7 +77,7 @@ void multiply(int row1, int row2, int col1, int col2, int arr1[row1][col1], int 
 
 void main()
 {
-    int aRow, aCol, bRow, bCol, result;
+    int aRow, aCol, bRow, bCol;
 
     printf("Matrix multiplication of two matrices : matrixA & matrixB\n");
     printf("Enter the total no. of rows you want in Matrix A :");
