@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 // Author : Eshita Das
 // gcc Ex_10.c -o Ex_10.exe
 //.\Ex_10.exe
