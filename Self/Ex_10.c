@@ -28,7 +28,7 @@ void takeVal(int row, int col, int arr[row][col])
     }
     else
     {
-        printf("An unknown error ocuured!");
+        printf("Error : Can't add values\n");
     }
 }
 
@@ -49,14 +49,14 @@ void printVal(int row, int col, int arr[row][col])
 
 void multiply(int row1, int row2, int col1, int col2, int arr1[row1][col1], int arr2[row2][col2])
 {
-    int resultArr[row1][col2];
     if (col1 == row2)
     {
+        int resultArr[row1][col2];
         for (int i = 0; i < row1; i++)
         {
             for (int j = 0; j < col2; j++)
             {
-                // here we can get each element of resultArr;
+                // here we can get each element of resultArr
                 resultArr[i][j] = 0;
                 for (int k = 0; k < row2; k++)
                 {
