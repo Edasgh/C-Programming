@@ -44,6 +44,7 @@ void traverseList(struct node *head, struct node **temp)
 
 void insertAtStart(struct node **head, struct node **temp, struct node **newNode)
 {
+    printf("Inserting a node at the beginning of linked list \n");
     *newNode = (struct node *)malloc(sizeof(struct node));
     printf("\nEnter value : ");
     scanf("%d", &((*newNode)->data));
@@ -54,6 +55,7 @@ void insertAtStart(struct node **head, struct node **temp, struct node **newNode
 
 void insertAtEnd(struct node **head, struct node **temp, struct node **newNode)
 {
+    printf("Inserting a node at the end of linked list \n");
     *newNode = (struct node *)malloc(sizeof(struct node));
     printf("\nEnter value : ");
     scanf("%d", &((*newNode)->data));
@@ -66,11 +68,14 @@ void insertAtEnd(struct node **head, struct node **temp, struct node **newNode)
     (*temp)->next = *newNode;
 }
 
-void insertAtPos(int pos, struct node **head, struct node **temp, struct node **newNode)
+void insertAtPos(struct node **head, struct node **temp, struct node **newNode)
 {
+    int pos;
+    printf("Enter the position at where you want to insert node : ");
+    scanf("%d", &pos);
     *temp = *head;
     int i = 1;
-    while (i < pos)
+    while (i < pos - 1)
     {
         *temp = (*temp)->next;
         i++;
@@ -86,21 +91,13 @@ void main()
 {
     struct node *head = NULL, *temp = NULL, *newNode = NULL;
 
-addNode:
     createNode(&head, &temp, &newNode);
-    int val;
-    printf("\nCreate another node ?\n 1.Yes ,2.NO  :  ");
-    scanf("%d", &val);
-    if (val == 1)
-    {
-        goto addNode;
-    }
-    else
-    {
-        goto printVal;
-    }
+    createNode(&head, &temp, &newNode);
+    createNode(&head, &temp, &newNode);
+    // insertAtStart(&head, &temp, &newNode);
+    // insertAtEnd(&head, &temp, &newNode);
+    // insertAtPos(&head, &temp, &newNode);
 
-printVal:
     traverseList(head, &temp);
 
     // **ptr and &ptr is used to modify the original values in 'main'

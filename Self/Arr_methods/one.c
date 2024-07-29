@@ -1,4 +1,4 @@
-// Online C compiler to run C program online
+
 #include <stdio.h>
 #include <math.h>
 
@@ -50,6 +50,8 @@ void main()
         i++;
     }
 
+    // bubble sort -> ascending order
+    // binary search only works on sorted arrays
     for (i = 0; i < size - 1; i++)
     {
         flag = 0;
