@@ -25,7 +25,7 @@ void main()
         */
 
     char str[55];
-    fgets(str, 54, ptr);
+    fgets(str, 55, ptr);
     printf("The read characters are : %s\n", str);
     //  OUTPUT : The read characters are : This is my first file to use with C program
 
