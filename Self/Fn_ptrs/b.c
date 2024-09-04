@@ -9,6 +9,8 @@ void greetHelloAndExecute(int (*fptr)(int, int))
     printf("Hello user!\n");
     printf("The multiplication of 6 and 4 is %d\n", fptr(6, 4)); // here fptr or mult is the callback function
 }
+
+
 void main()
 {
 
