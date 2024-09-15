@@ -7,12 +7,10 @@ void main()
     scanf("%d", &n);
 
     int i = 0, j = 0;
-    int spaces = 2 * n - 1;
-    int stars = 0;
 
     if (n % 2 != 0)
     {
-        for(i=1;i<=2*n-1;i++)
+        for(i=1;i<=n;i++)
         {
           
             if(i%2==0 &&i<=n)
