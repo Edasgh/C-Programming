@@ -120,6 +120,7 @@ void main()
     while(1)
     {
     printf("\nNow select an option to perform :\n1.Addition of polynomials,\n2.Subtraction of polynomials,\n3.Multiplication of polynomials,\n4.exit\nSelect : ");
+    scanf("%d",&op);
     switch(op)
     {
         case 1:
