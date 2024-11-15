@@ -31,6 +31,7 @@ void Pop()
     }
     else
     {
+        printf("The popped item is %d\n",Stack[top]);
         top--;
     }
 }
