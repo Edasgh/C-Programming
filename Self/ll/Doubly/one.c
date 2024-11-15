@@ -91,6 +91,25 @@ void displayBack() //function to traverse the nodes in backwards manner doubly l
 
 
 
+void traverse()
+{
+    int ch;
+    printf("Select traversal mode : \n1.Forwards,\n2.Backwards\n");
+    scanf("%d", &ch);
+    switch (ch)
+    {
+    case 1:
+        displayFor();
+        break;
+    case 2:
+        displayBack();
+        break;
+    }
+}
+
+
+
+
 void insertAtStart()
 {
     Node *newNode;
@@ -163,16 +182,108 @@ void insertAtPos()
 
 }
 
+
+void insertNode()
+{
+    int ch;
+    printf("\nEnter an option\n1.Insert a node at the start,\n2.Insert a node at the end,\n3.Insert a node at a specific position\n");
+    scanf("%d",&ch);
+    switch (ch)
+    {
+    case 1:
+       insertAtStart();
+        break;
+    case 2:
+       insertAtEnd();
+        break;
+    case 3:
+        insertAtPos();
+        break;
+    default:
+        printf("Invalid option\n");
+    }
+}
+
 //deletion functions
 
+void delFromStart()
+{
+    Node *temp;
+    temp = head->next;
+    temp->prev = NULL;
+    free(temp);
+}
 
+void delFromEnd()
+{
+    Node *temp;
+    temp = tail;
+    (temp->prev)->next = NULL;
+    tail = tail->prev;
+    free(temp);
+}
+
+void delFromPos()
+{
+    int pos, length, i;
+    length = getLength();
+    printf("Enter the position from where you want to delete : ");
+    scanf("%d", &pos);
+    Node *temp, *temp1;
+    if (pos <= 0 || pos > length)
+    {
+        printf("Invalid position\n");
+    }
+    else if (pos == 1)
+    {
+        delFromStart();
+    }
+    else if (pos == length)
+    {
+        delFromEnd();
+    }
+    else
+    {
+        i = 1;
+        temp = head;
+        while (i < pos)
+        {
+            temp = temp->next;
+            i++;
+        }
+        temp1 = temp->next;
+        temp->next = temp1->next;
+        (temp1->next)->prev = temp;
+        free(temp);
+    }
+}
+
+void delNode()
+{
+    int ch;
+    printf("\nEnter an option\n1.Delete a node from the start,\n2.Delete a node from the end,\n3.Delete a node from a specific position\n");
+    switch (ch)
+    {
+    case 1:
+        delFromStart();
+        break;
+    case 2:
+        delFromEnd();
+        break;
+    case 3:
+        delFromPos();
+        break;
+    default:
+        printf("Invalid option\n");
+    }
+}
 
 void main()
 {
-    int choice,ch;
+    int choice;
     while(1)
     {
-        printf("\nPlease select an option to perform :\n1. Create a node,\n2.Traverse the linked list, \n3. Insert a node at beginning,\n4. Insert a node at end,\n5.Insert a node at a specific position,\n6.exit \n");
+        printf("\nPlease select an option to perform :\n1. Create a node,\n2.Traverse the linked list, \n3. Insert a node \n4.Delete a node,\n5.exit \n");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -180,28 +291,15 @@ void main()
             createNode();
             break;
             case 2:
-            printf("Select traversal mode : \n1.Forwards,\n2.Backwards\n");
-            scanf("%d",&ch);
-            switch(ch)
-            {
-                case 1:
-                displayFor();
-                break;
-                case 2:
-                displayBack();
-                break;
-            }
+            traverse();
             break;
             case 3:
-            insertAtStart();
+            insertNode();
             break;
             case 4:
-            insertAtEnd();
+            delNode();
             break;
             case 5:
-            insertAtPos();
-            break;
-            case 6:
             exit(0);
             break;
             default:
