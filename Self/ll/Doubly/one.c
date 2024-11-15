@@ -229,7 +229,7 @@ void delFromPos()
     length = getLength();
     printf("Enter the position from where you want to delete : ");
     scanf("%d", &pos);
-    Node *temp, *temp1;
+    Node *temp;
     if (pos <= 0 || pos > length)
     {
         printf("Invalid position\n");
@@ -251,9 +251,8 @@ void delFromPos()
             temp = temp->next;
             i++;
         }
-        temp1 = temp->next;
-        temp->next = temp1->next;
-        (temp1->next)->prev = temp;
+        (temp->prev)->next = temp->next;
+        (temp->next)->prev = temp->prev;
         free(temp);
     }
 }
@@ -262,6 +261,7 @@ void delNode()
 {
     int ch;
     printf("\nEnter an option\n1.Delete a node from the start,\n2.Delete a node from the end,\n3.Delete a node from a specific position\n");
+    scanf("%d",&ch);
     switch (ch)
     {
     case 1:
