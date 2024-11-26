@@ -9,20 +9,17 @@ int rear =-1;
 int isFull(int size)
 {
     int result=0;
-    if(front==0 && rear==size-1)
+    if ((front == 0 && rear == size - 1) || ((rear + 1) % size == front))
     {
-        result = 1;
-    }
-    else if ((rear + 1) % size == front){
         result = 1;
     }
         return result;
 }
 
-int isEmpty(int size)
+int isEmpty()
 {
     int result = 0;
-    if((front==-1 && rear==-1))
+    if(front==-1 && rear==-1)
     {
         result = 1;
     }
@@ -50,7 +47,7 @@ void enqueue (int size)
 void dequeue(int size)
 {
     int empty;
-    empty = isEmpty(size);
+    empty = isEmpty();
     if(empty)
     {
         printf("The queue is empty\n");
@@ -73,7 +70,7 @@ void dequeue(int size)
 void display( int size)
 {
     int empty, i;
-    empty = isEmpty(size);
+    empty = isEmpty();
     if(empty)
     {
         printf("The queue is empty\n");
@@ -105,7 +102,7 @@ void display( int size)
 void Peek(int size)
 {
     int empty;
-    empty = isEmpty(size);
+    empty = isEmpty();
     if(empty)
     {
         printf("The queue is empty\n");
