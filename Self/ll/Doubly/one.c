@@ -1,3 +1,4 @@
+//doubly linked list
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,6 +10,7 @@ typedef struct node {
 
 Node *head = NULL, *tail = NULL;
 
+//get the length of the doubly linked list
 int getLength()
 {
     int length = 0;
@@ -32,6 +34,7 @@ int getLength()
    
 }
 
+//create a node -> normal left to right flow
 void createNode()
 {
     Node *newNode;
@@ -90,7 +93,7 @@ void displayBack() //function to traverse the nodes in backwards manner doubly l
 }
 
 
-
+//traverse a doubly linked list
 void traverse()
 {
     int ch;
@@ -107,9 +110,28 @@ void traverse()
     }
 }
 
+//reverse a doubly linked list
+void reverse(){
+    Node *temp, *pr, *nxt;
+    temp = head;
+    while(temp!=NULL)
+    {
+        pr = temp->prev;
+        nxt = temp->next;
+        temp->prev=nxt;
+        temp->next = pr;
+        temp = nxt;
+    }
+    temp = head;
+    head = tail;
+    tail = temp;
+
+    //display in forwards manner
+    displayFor();
+}
 
 
-
+//insertion functions
 void insertAtStart()
 {
     Node *newNode;
@@ -182,7 +204,7 @@ void insertAtPos()
 
 }
 
-
+// insert a node in the linked list
 void insertNode()
 {
     int ch;
@@ -257,6 +279,7 @@ void delFromPos()
     }
 }
 
+//delete a node in the linked list
 void delNode()
 {
     int ch;
@@ -283,7 +306,7 @@ void main()
     int choice;
     while(1)
     {
-        printf("\nPlease select an option to perform :\n1. Create a node,\n2.Traverse the linked list, \n3. Insert a node \n4.Delete a node,\n5.exit \n");
+        printf("\nPlease select an option to perform :\n1. Create a node,\n2.Traverse the linked list, \n3. Insert a node \n4.Delete a node,\n5. reverse the linked list,\n6.exit \n");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -300,6 +323,9 @@ void main()
             delNode();
             break;
             case 5:
+            reverse();
+            break;
+            case 6:
             exit(0);
             break;
             default:
