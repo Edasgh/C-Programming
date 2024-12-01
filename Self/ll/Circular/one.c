@@ -8,7 +8,7 @@ typedef struct node
     struct node *next;
 } Node;
 
-Node *head = NULL, *temp;
+Node *head = NULL, *tail = NULL, *temp;
 
 // create node in circular l.l.
 void createNode()
@@ -262,12 +262,38 @@ void deletion()
 }
 
 
+void reverse()
+{
+    Node *nextNode , *prev, *current, *t;
+    current = nextNode = head;
+    prev = NULL;
+    while(nextNode->next!=head)
+    {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+    
+      current->next = prev;
+      tail = current;
+
+    t = tail;
+    while(t!=NULL)
+    {
+        printf("%d ",t->data);
+        t = t->next;
+
+    }
+   
+}
+
 void main()
 {
     int ch , length;
     while(1)
     {
-        printf("\nSelect : \n1. Create a node, \n2. Display the linked list,\n3. Insert a node,\n4.Delete a node,\n5. view the length of the linked list\n6. exit\n");
+        printf("\nSelect : \n1. Create a node, \n2. Display the linked list,\n3. Reverse the linked list \n4. Insert a node,\n5.Delete a node,\n6. view the length of the linked list\n7. exit\n");
         scanf("%d",&ch);
         switch(ch)
         {
@@ -278,16 +304,20 @@ void main()
             display();
             break;
             case 3:
-            insertion();
+            reverse();
+            
             break;
             case 4:
-            deletion();
+            insertion();
             break;
             case 5:
+            deletion();
+            break;
+            case 6:
             length = getLength();
             printf("The length of the linked list s %d\n",length);
             break;
-            case 6:
+            case 7:
             exit(0);
             break;
             default:
