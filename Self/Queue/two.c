@@ -1,47 +1,43 @@
-//implementation of queue using array in C
+// implementation of queue using array in C
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 5
-int Queue[N];
-int front=-1,rear=-1;
+int Queue[100];
+int front = -1, rear = -1;
 
-
-void enqueue(){
+void enqueue(int N)
+{
     int num;
-    printf("Enter the data to insert : ");
-    scanf("%d",&num);
-    if(rear<N-1)
+    if (rear < N - 1)
     {
-    if(front==-1 && rear==-1)
-    {
-        front=rear=0;
-    }
-    else
-    {
-        rear++;
-    }
-        Queue[rear]=num;
+        printf("Enter the data to insert : ");
+        scanf("%d", &num);
+        if (front == -1 && rear == -1)
+        {
+            front = rear = 0;
+        }
+        else
+        {
+            rear++;
+        }
+        Queue[rear] = num;
     }
     else
     {
         printf("Overflow condition\n");
     }
-
 }
-
 
 void dequeue()
 {
-    if(front==-1 && rear==-1)
+    if (front == -1 && rear == -1)
     {
         printf("Underflow condition\n");
     }
     else if (front == rear)
     {
-       printf("The dequeued element is %d\n",Queue[front]);
-       front=rear=-1;
-        
+        printf("The dequeued element is %d\n", Queue[front]);
+        front = rear = -1;
     }
     else
     {
@@ -53,33 +49,36 @@ void dequeue()
 void display()
 {
     int i;
-    if(front==-1 && rear==-1)
+    if (front == -1 && rear == -1)
     {
         printf("The queue is empty\n");
     }
     else
     {
-        for(i=front;i<=rear;i++)
+        for (i = front; i <= rear; i++)
         {
-            printf("%d ",Queue[i]);
+            printf("%d ", Queue[i]);
         }
     }
 }
 
 void Peek()
 {
-    if(front==-1 && rear==-1)
+    if (front == -1 && rear == -1)
     {
         printf("The queue is empty\n");
     }
     else
     {
-        printf("The front element is %d\n",Queue[front]);
+        printf("The front element is %d\n", Queue[front]);
     }
 }
 
 void main()
 {
+    int size;
+    printf("Enter the size of the queue : ");
+    scanf("%d", &size);
     int choice;
     while (1)
     {
@@ -88,7 +87,7 @@ void main()
         switch (choice)
         {
         case 1:
-            enqueue();
+            enqueue(size);
             break;
         case 2:
             dequeue();

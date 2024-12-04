@@ -1,6 +1,0 @@
-int a = 45; //Single comment here (mention not lol)
-/* a block comment which will be removed fill the void like a kids mess up with crayons, anddddddd I loveeee Crayyyooonsss lol lol lol lol */
-// printing the number here so that I will be able to print my future that how it will be in the future for the future lol lol lol 
-printf("%d\n",a);
-/* End of code (Everybody knows lol) */
-// Another line in which I am not so sure that it will be more than 15 characters or not...Like really I'm not sure...Are You?
