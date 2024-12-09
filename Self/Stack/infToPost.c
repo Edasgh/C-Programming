@@ -30,7 +30,7 @@ int prec(char c)
     return prec;
 }
 
-void infixToPrefix(char *exp)
+void infixToPostfix(char *exp)
 {
     int n = strlen(exp);
     char res[n + 1];
@@ -75,5 +75,5 @@ void infixToPrefix(char *exp)
 void main()
 {
     char infix[] = "K+L-M*N+(O^P)*W/U/V*T+Q";
-    infixToPrefix(infix);
+    infixToPostfix(infix);
 }
