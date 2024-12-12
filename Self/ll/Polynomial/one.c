@@ -39,13 +39,13 @@ void printPol(Node *head)
     printf("\n");
     while (temp != NULL)
     {
-        if(temp->coeff!=0)
+        if (temp->coeff != 0)
         {
-        printf(" %dx^%d", temp->coeff, temp->power);
-        if (temp->next != NULL)
-        {
-            printf(" +");
-        }
+            printf(" %dx^%d", temp->coeff, temp->power);
+            if (temp->next != NULL)
+            {
+                printf(" +");
+            }
         }
         temp = temp->next;
     }
