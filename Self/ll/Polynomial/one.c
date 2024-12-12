@@ -228,7 +228,7 @@ void multpol(Node *head1, Node *head2, int power1, int power2)
         a = head3;
         while (a != NULL)
         {
-            if (T->power == a->power && T->coeff != a->coeff && a->coeff != 0)
+            if (T->power == a->power && T->next != a->next && a->coeff != 0)
             {
                 T->coeff = (T->coeff) + (a->coeff);
                 a->coeff = 0;
