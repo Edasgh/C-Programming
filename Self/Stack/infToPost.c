@@ -1,4 +1,5 @@
 // c code to convert an infix expression into a postfix expression
+// gcc infToPost.c -o a
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
