@@ -111,49 +111,57 @@ void insAfterPos(Node **head, Node **tail)
     int pos;
     printf("Enter the position to insert after that : ");
     scanf("%d", &pos);
-    insAtPos(head, tail, pos + 1);
+    int length = getLength(*head);
+    if (pos + 1 == length + 1)
+    {
+        insAtEnd(head, tail);
+    }
+    else
+    {
+        insAtPos(head, tail, pos + 1);
+    }
 }
 
 void insAfterVal(Node **head, Node **tail)
 {
     if (*head == NULL)
     {
-        printf("The linked list is empty, creating a node..\n");
+        printf("The linked list is empty, creating a node...\n");
         createNode(head, tail);
     }
     else
     {
-        int value, flag = 0;
-        printf("Enter the value to insert a node after that : ");
+        int value;
+        printf("Enter the value to insert a node after: ");
         scanf("%d", &value);
 
         Node *t = *head;
-        if (t->data == value)
+        while (t != NULL)
         {
-            flag = 1;
-        }
+            if (t->data == value) // Value found
+            {
+                Node *newNode = (Node *)malloc(sizeof(Node));
+                printf("Enter data: ");
+                scanf("%d", &(newNode->data));
 
-        while (t->data != value && t != NULL)
-        {
+                newNode->next = t->next;
+                t->next = newNode;
+
+                // Update the tail if the new node is appended at the end
+                if (t == *tail)
+                {
+                    *tail = newNode;
+                }
+                return; // Exit once the node is inserted
+            }
             t = t->next;
-            if (t->data == value)
-                flag = 1;
         }
 
-        if (flag == 1)
-        {
-            Node *newNode = (Node *)malloc(sizeof(Node));
-            printf("Enter data : ");
-            scanf("%d", &(newNode->data));
-            newNode->next = t->next;
-            t->next = newNode;
-        }
-        else
-        {
-            printf("The value %d is not found!\n", value);
-        }
+        // If the loop completes and value is not found
+        printf("The value %d is not found in the linked list!\n", value);
     }
 }
+
 
 void insertNode(Node **head, Node **tail)
 {
@@ -170,11 +178,13 @@ void insertNode(Node **head, Node **tail)
         insAtEnd(head, tail);
         break;
     case 3:
+    {
         int pos;
         printf("Enter a position to insert a node : ");
         scanf("%d", &pos);
         insAtPos(head, tail, pos);
-        break;
+    }
+    break;
     case 4:
         insAfterPos(head, tail);
         break;
@@ -277,7 +287,7 @@ void delAfterPos(Node **head, Node **tail)
     int pos;
     printf("Enter a position to delete a node after that : ");
     scanf("%d", &pos);
-    delFromPos(head, tail, pos);
+    delFromPos(head, tail, pos + 1);
 }
 
 void delAtVal(Node **head, Node **tail)
@@ -288,27 +298,31 @@ void delAtVal(Node **head, Node **tail)
     }
     else
     {
-        int value, flag = 0;
-        printf("Enter the value to delete that : ");
+        int value;
+        printf("Enter the value to delete: ");
         scanf("%d", &value);
 
+        // Check if the value is at the head
         if ((*head)->data == value)
+        {
             delFromBeg(head, tail);
+        }
+        // Check if the value is at the tail
         else if ((*tail)->data == value)
+        {
             delFromEnd(head, tail);
+        }
         else
         {
-            // 2 3 4 5 6
+            // Traverse the list to find the value
             Node *t = *head;
-            int flag = 0;
-            while (t->next->data != value && t != NULL)
+            while (t->next != NULL && t->next->data != value)
             {
                 t = t->next;
-                if (t->next->data == value)
-                    flag = 1;
             }
 
-            if (flag == 1)
+            // If the value is found
+            if (t->next->data == value)
             {
                 Node *temp = t->next;
                 t->next = temp->next;
@@ -317,7 +331,7 @@ void delAtVal(Node **head, Node **tail)
             }
             else
             {
-                printf("The value %d is not found!\n", value);
+                printf("The value %d is not found in the linked list!\n", value);
             }
         }
     }
@@ -338,11 +352,14 @@ void deleteNode(Node **head, Node **tail)
         delFromEnd(head, tail);
         break;
     case 3:
+    {
         int pos;
         printf("Enter a position to delete node : ");
         scanf("%d", &pos);
         delFromPos(head, tail, pos);
-        break;
+    }
+    break;
+
     case 4:
         delAfterPos(head, tail);
         break;
@@ -391,27 +408,23 @@ void search(Node *head, Node *tail)
         }
         else
         {
-            int flag = 0, i = 0;
+            int i = 0;
             Node *t = head;
-            while (t->data != value && t != NULL)
+            while (t != NULL)
             {
-                i++;
-                t = t->next;
                 if (t->data == value)
                 {
-                    flag = 1;
-                    break;
+                    printf("The value %d is found at index = %d\n", value, i);
+          
+                    return;
                 }
+                i++;
+                t = t->next;
             }
 
-            if (flag == 1)
-            {
-                printf("The value %d is found at index = %d\n", value, i);
-            }
-            else
-            {
+            
                 printf("The value %d is not found!\n", value);
-            }
+            
         }
     }
 }
@@ -424,22 +437,30 @@ void reverse(Node **head, Node **tail)
     }
     else
     {
-        Node *curr = *head, *prev = NULL, *next;
+        Node *curr = *head, *prev = NULL, *next = NULL;
+
+        // Reverse the linked list
         while (curr != NULL)
         {
-            // Store next
+            // Store the next node
             next = curr->next;
 
-            // Reverse current node's next pointer
+            // Reverse the link
             curr->next = prev;
 
-            // Move pointers one position ahead
+            // Move to the next node
             prev = curr;
             curr = next;
         }
+
+        // Update the tail to the original head
+        *tail = *head;
+
+        // Update the head to the new head
         *head = prev;
-        printf("\nReversing the linked list \n");
-        display(prev);
+
+        printf("\nReversing the linked list...\n");
+        display(*head);
     }
 }
 
