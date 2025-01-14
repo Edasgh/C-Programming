@@ -1,0 +1,199 @@
+### Step-by-Step Explanation of the `reverse` Function for a **Singly Linked List**
+
+This function reverses a singly linked list iteratively by modifying the `next` pointers of each node. Here’s a detailed breakdown of how it works:
+
+---
+
+### 1. **Check for an Empty List**
+- If the list is empty (`*head == NULL`), print:  
+  ```
+  "The linked list is empty"
+  ```
+- Exit the function as there's nothing to reverse.
+
+---
+
+### 2. **Set Up Pointers**
+- **`curr`**: Start at the head of the list (`*head`).
+- **`prev`**: Initialize to `NULL` (will become the previous node during reversal).
+- **`next`**: Initialize to `NULL` (used to temporarily store the next node).
+
+---
+
+### 3. **Iterate Through the List**
+Using a `while` loop, traverse the list node by node until the end is reached (`curr == NULL`):
+
+#### For Each Node:
+1. **Store the Next Node**:
+   - Save the `next` pointer of the current node:
+     ```c
+     next = curr->next;
+     ```
+
+2. **Reverse the Link**:
+   - Point the `next` of the current node to `prev` to reverse the direction:
+     ```c
+     curr->next = prev;
+     ```
+
+3. **Move the Pointers Forward**:
+   - Update `prev` to the current node:
+     ```c
+     prev = curr;
+     ```
+   - Move `curr` to the next node (stored in `next`):
+     ```c
+     curr = next;
+     ```
+
+---
+
+### 4. **Update the Head and Tail**
+- After the loop, `prev` points to the last node, which is the **new head** of the reversed list. Update:
+  ```c
+  *head = prev;
+  ```
+
+- The original head becomes the new **tail**. Update:
+  ```c
+  *tail = *head;
+  ```
+
+---
+
+### 5. **Print the Reversed List**
+- Call the `display(*head)` function to print the contents of the reversed linked list.
+
+---
+
+### Example Walkthrough
+
+#### Initial Singly Linked List:
+```
+10 -> 20 -> 30 -> 40 -> NULL
+```
+
+#### Iteration Steps:
+
+1. **Initialization**:
+   - `curr = *head` (node `10`)
+   - `prev = NULL`
+   - `next = NULL`
+
+---
+
+#### Iteration 1 (Processing Node `10`):
+- **Store Next**:
+  ```c
+  next = curr->next; // next = node 20
+  ```
+- **Reverse Link**:
+  ```c
+  curr->next = prev; // 10->next = NULL
+  ```
+- **Move Pointers**:
+  ```c
+  prev = curr;       // prev = node 10
+  curr = next;       // curr = node 20
+  ```
+
+Updated List (partially reversed):
+```
+10 <- NULL
+20 -> 30 -> 40 -> NULL
+```
+
+---
+
+#### Iteration 2 (Processing Node `20`):
+- **Store Next**:
+  ```c
+  next = curr->next; // next = node 30
+  ```
+- **Reverse Link**:
+  ```c
+  curr->next = prev; // 20->next = 10
+  ```
+- **Move Pointers**:
+  ```c
+  prev = curr;       // prev = node 20
+  curr = next;       // curr = node 30
+  ```
+
+Updated List (partially reversed):
+```
+20 -> 10 <- NULL
+30 -> 40 -> NULL
+```
+
+---
+
+#### Iteration 3 (Processing Node `30`):
+- **Store Next**:
+  ```c
+  next = curr->next; // next = node 40
+  ```
+- **Reverse Link**:
+  ```c
+  curr->next = prev; // 30->next = 20
+  ```
+- **Move Pointers**:
+  ```c
+  prev = curr;       // prev = node 30
+  curr = next;       // curr = node 40
+  ```
+
+Updated List (partially reversed):
+```
+30 -> 20 -> 10 <- NULL
+40 -> NULL
+```
+
+---
+
+#### Iteration 4 (Processing Node `40`):
+- **Store Next**:
+  ```c
+  next = curr->next; // next = NULL
+  ```
+- **Reverse Link**:
+  ```c
+  curr->next = prev; // 40->next = 30
+  ```
+- **Move Pointers**:
+  ```c
+  prev = curr;       // prev = node 40
+  curr = next;       // curr = NULL
+  ```
+
+Updated List (fully reversed):
+```
+40 -> 30 -> 20 -> 10 -> NULL
+```
+
+---
+
+### 6. **Post-Reversal Updates**
+- Set `*head` to `prev` (node `40`):
+  ```c
+  *head = prev;
+  ```
+
+- Set `*tail` to the original head (node `10`).
+
+---
+
+### 7. **Display Output**
+The function prints the reversed list:
+```
+40 -> 30 -> 20 -> 10 -> NULL
+```
+
+---
+
+### Final Reversed List:
+```
+40 -> 30 -> 20 -> 10 -> NULL
+```
+
+This function efficiently reverses a singly linked list using an iterative approach. Let me know if you'd like further clarifications! 😊

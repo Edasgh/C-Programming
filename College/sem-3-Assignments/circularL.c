@@ -296,6 +296,24 @@ void delAtVal(Node **head, Node **tail)
     }
 }
 
+void display(Node *head)
+{
+    if (head == NULL)
+    {
+        printf("The linked list is empty!\n");
+    }
+    else
+    {
+
+        Node *t = head;
+        while (t->next != head)
+        {
+            printf("%d ", t->data);
+            t = t->next;
+        }
+    }
+}
+
 void reverse(Node **head, Node **tail)
 {
     if (*head == NULL)
@@ -457,7 +475,7 @@ int main()
             insertNode(&head, &tail);
             break;
         case 4:
-            display(head, tail);
+            display(head);
             break;
         case 5:
             search(head, tail);

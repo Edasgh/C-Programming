@@ -1,0 +1,156 @@
+### Step-by-Step Explanation of the `reverse` Function for a **Doubly Linked List**
+
+This function reverses a doubly linked list by swapping the `prev` and `next` pointers of each node. Here's a detailed step-by-step breakdown of the process:
+
+---
+
+### Initial Setup
+
+1. **Check for Empty List**:
+   - If the list is empty (`*head == NULL`), print a message and exit the function.
+
+2. **Initialize Pointers**:
+   - `curr`: Start at the head of the list (`*head`).
+   - `temp`: A temporary pointer used to store the `prev` pointer of the current node.
+
+---
+
+### Reversal Process (While Loop)
+
+This loop iterates through the doubly linked list and reverses the `prev` and `next` pointers for each node.
+
+#### Iteration Steps:
+
+1. **Store the `prev` Pointer**:
+   - Save the current node’s `prev` pointer in `temp` for later use.
+
+2. **Swap `prev` and `next` Pointers**:
+   - Assign the `next` pointer of the current node to its `prev` pointer (`curr->prev = curr->next`).
+   - Assign the `prev` pointer of the current node to its `next` pointer (`curr->next = temp`).
+
+3. **Move to the Next Node**:
+   - Update `curr` to its new `prev` pointer, which is now the next node in the original list.
+
+---
+
+### Post-Reversal Adjustments
+
+After the loop, all nodes have their `prev` and `next` pointers swapped. However, the head and tail pointers need to be updated to reflect the new structure.
+
+1. **Update `*head`**:
+   - `temp` now points to the second-to-last node in the original list. The new head is `temp->prev`.
+
+2. **Update `*tail`**:
+   - Start at the new head (`*head`) and traverse the list using the `next` pointer until the last node is reached.
+   - Set `*tail` to this last node.
+
+---
+
+### Final Output
+
+1. Print a message: "Doubly linked list reversed."
+2. Call the `display` function to show the reversed list.
+
+---
+
+### Example Walkthrough
+
+#### Initial Doubly Linked List:
+```
+10 <-> 20 <-> 30 <-> 40 <-> NULL
+```
+
+#### Iteration 1 (Node `10`):
+- Before:
+  ```
+  Node: 10
+  prev = NULL
+  next = 20
+  ```
+- After swapping:
+  ```
+  Node: 10
+  prev = 20
+  next = NULL
+  ```
+- Move to `curr->prev` (node `20`).
+
+---
+
+#### Iteration 2 (Node `20`):
+- Before:
+  ```
+  Node: 20
+  prev = 10
+  next = 30
+  ```
+- After swapping:
+  ```
+  Node: 20
+  prev = 30
+  next = 10
+  ```
+- Move to `curr->prev` (node `30`).
+
+---
+
+#### Iteration 3 (Node `30`):
+- Before:
+  ```
+  Node: 30
+  prev = 20
+  next = 40
+  ```
+- After swapping:
+  ```
+  Node: 30
+  prev = 40
+  next = 20
+  ```
+- Move to `curr->prev` (node `40`).
+
+---
+
+#### Iteration 4 (Node `40`):
+- Before:
+  ```
+  Node: 40
+  prev = 30
+  next = NULL
+  ```
+- After swapping:
+  ```
+  Node: 40
+  prev = NULL
+  next = 30
+  ```
+- Exit loop as `curr->prev == NULL`.
+
+---
+
+### Adjust Pointers
+
+1. **Update `*head`**:
+   - `temp` now points to node `30`. The new head is `temp->prev` (node `40`).
+
+2. **Update `*tail`**:
+   - Traverse from the new head (`40`) until the last node (`10`).
+   - Set `*tail = 10`.
+
+---
+
+#### Final Reversed Doubly Linked List:
+```
+40 <-> 30 <-> 20 <-> 10 <-> NULL
+```
+
+---
+
+### Summary
+
+1. The `prev` and `next` pointers of each node are swapped.
+2. The head pointer is updated to the last node in the original list.
+3. The tail pointer is updated to the first node in the original list.
+4. The list is traversed in reverse order to confirm the result.
+
+Let me know if you'd like to simulate it with more details! 😊

@@ -118,7 +118,6 @@ void insAtPos(Node **head, Node **tail, int pos)
             newNode->prev = t;
             t->next->prev = newNode;
             t->next = newNode;
-
         }
     }
 }
@@ -385,35 +384,13 @@ void display(Node *head, Node *tail)
     }
     else
     {
-        int ch;
-        printf("\nSelect an option: \n1. Traverse in forwards manner,\n2.Traverse in backwards manner \nSelect : ");
-        scanf("%d", &ch);
-        switch (ch)
+
+        printf("\nTraversing in forwards manner\n");
+        Node *t = head;
+        while (t != NULL)
         {
-        case 1:
-        {
-            printf("\nTraversing in forwards manner\n");
-            Node *t = head;
-            while (t != NULL)
-            {
-                printf("%d ", t->data);
-                t = t->next;
-            }
-        }
-        break;
-        case 2:
-        {
-            printf("\nTraversing in backwards manner\n");
-            Node *t = tail;
-            while (t != NULL)
-            {
-                printf("%d ", t->data);
-                t = t->prev;
-            }
-        }
-        break;
-        default:
-            printf("Invalid option\n");
+            printf("%d ", t->data);
+            t = t->next;
         }
     }
 }
@@ -528,4 +505,3 @@ int main()
 
     return 0;
 }
-
