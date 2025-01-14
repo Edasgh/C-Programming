@@ -116,6 +116,9 @@ void insAtPos(Node **head, Node **tail, int pos)
             scanf("%d", &(newNode->data));
             newNode->next = t->next;
             newNode->prev = t;
+            t->next->prev = newNode;
+            t->next = newNode;
+
         }
     }
 }
@@ -525,3 +528,4 @@ int main()
 
     return 0;
 }
+
