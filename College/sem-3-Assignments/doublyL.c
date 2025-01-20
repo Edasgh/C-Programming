@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+//gcc doublyl.c -o a
 typedef struct node
 {
     int data;
@@ -127,7 +127,15 @@ void insAfterPos(Node **head, Node **tail)
     int pos;
     printf("Enter the position to insert a node after that : ");
     scanf("%d", &pos);
-    insAtPos(head, tail, pos + 1);
+    int length = getLength(*head);
+    if (pos + 1 == length + 1)
+    {
+        insAtEnd(head, tail);
+    }
+    else
+    {
+        insAtPos(head, tail, pos + 1);
+    }
 }
 
 void insAfterValue(Node **head, Node **tail)
@@ -143,12 +151,23 @@ void insAfterValue(Node **head, Node **tail)
         printf("Enter the value to insert a node after that : ");
         scanf("%d", &value);
         if ((*head)->data == value)
-            insAtBeg(head, tail);
+           {
+               Node *newNode = (Node *)malloc(sizeof(Node));
+               printf("Enter data : ");
+               scanf("%d", &(newNode->data));
+               newNode->prev = *head;
+               newNode->next = (*head)->next;
+               (*head)->next->prev=newNode;
+               (*head)->next = newNode;
+               return;
+           }
         else if ((*tail)->data == value)
-            insAtEnd(head, tail);
+           {
+               insAtEnd(head, tail);
+               return;
+           }
         else
         {
-            int flag = 0;
             Node *t = *head;
             while (t != NULL)
             {
@@ -198,7 +217,7 @@ void insertNode(Node **head, Node **tail)
         insAfterPos(head, tail);
         break;
     case 5:
-        insAfterVal(head, tail);
+        insAfterValue(head,tail);
         break;
     default:
         printf("Invalid option!\n");
@@ -277,6 +296,7 @@ void delFromPos(Node **head, Node **tail, int pos)
         {
             // 2 3 4 5
             // 0 1 2 3
+            // Traverse the list to find the node just before the target position
             Node *t = *head;
             int i = 0;
             while (i < pos - 1 && t != NULL)
@@ -285,9 +305,22 @@ void delFromPos(Node **head, Node **tail, int pos)
                 t = t->next;
             }
 
-            Node *temp = t->next;
-            t->next = temp->next;
-            t->next->prev = t;
+            // Ensure `t` and `t->next` are valid before proceeding
+            if (t == NULL || t->next == NULL)
+            {
+                printf("Invalid position!\n");
+                return;
+            }
+
+            Node *temp = t->next; // Node to be deleted
+            t->next = temp->next; // Update the next pointer of the previous node
+
+            // Ensure `t->next` is valid before updating its `prev` pointer
+            if (t->next != NULL)
+            {
+                t->next->prev = t;
+            }
+
             printf("The deleted element is %d\n", temp->data);
             free(temp);
         }
@@ -376,7 +409,7 @@ void deleteNode(Node **head, Node **tail)
     }
 }
 
-void display(Node *head, Node *tail)
+void display(Node *head)
 {
     if (head == NULL)
     {
@@ -385,7 +418,7 @@ void display(Node *head, Node *tail)
     else
     {
 
-        printf("\nTraversing in forwards manner\n");
+        printf("\nTraversing the linked list\n");
         Node *t = head;
         while (t != NULL)
         {
@@ -464,7 +497,7 @@ void reverse(Node **head, Node **tail)
         }
 
         printf("\n....Doubly linked list reversed...\n");
-        display(*head, *tail);
+        display(*head);
     }
 }
 
@@ -475,6 +508,7 @@ int main()
     while (1)
     {
         printf("\nSelect an option to perform : \n1.Create a node, \n2.Delete a node , \n3.Insert a node, \n4.Display the doubly linked list,\n5.Search an element in the doubly linked list,\n6.Reverse the doubly linked list\n7.Exit \nSelect : ");
+        scanf("%d",&ch);
         switch (ch)
         {
         case 1:
@@ -487,7 +521,7 @@ int main()
             insertNode(&head, &tail);
             break;
         case 4:
-            display(head, tail);
+            display(head);
             break;
         case 5:
             search(head, tail);

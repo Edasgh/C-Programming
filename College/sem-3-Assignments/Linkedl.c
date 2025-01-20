@@ -132,7 +132,7 @@ void insAfterVal(Node **head, Node **tail)
     else
     {
         int value;
-        printf("Enter the value to insert a node after: ");
+        printf("Enter the value to insert a node after that: ");
         scanf("%d", &value);
 
         Node *t = *head;
