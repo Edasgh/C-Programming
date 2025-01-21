@@ -10,7 +10,7 @@ typedef struct node
 } Node;
 
 // create a polynomial
-void createPol(Node **head, Node **tail,int p)
+void createPol(Node **head, Node **tail, int p)
 {
     if (p <= 0)
     {
@@ -39,11 +39,11 @@ void createPol(Node **head, Node **tail,int p)
     }
 }
 
-//printPol
+// printPol
 void printPol(Node *head)
 {
     Node *t;
-    if(head==NULL)
+    if (head == NULL)
     {
         printf("\nThe Polynomial doesn't exist\n");
     }
@@ -51,12 +51,12 @@ void printPol(Node *head)
     {
         printf("\n");
         t = head;
-        while(t!=NULL)
+        while (t != NULL)
         {
-            printf("%d^%d ",t->data,t->power);
-            if(t->next!=NULL)
+            printf("%d^%d ", t->data, t->power);
+            if (t->next != NULL)
             {
-                printf("+");
+                printf("+ ");
             }
 
             t = t->next;
@@ -68,55 +68,54 @@ void printPol(Node *head)
 // add 2 polynomials
 void addPol(Node **head1, Node **head2, int power1, int power2)
 {
-    if(*head1!=NULL && *head2!=NULL)
+    if (*head1 != NULL && *head2 != NULL)
     {
         printf("\nAdding the polynomials\n");
-    Node *head3 = NULL, *tail3 = NULL;
-    int p = power2 > power1 ? power2 : power1;
-    if (power1 == power2)
-        p = power1;
-    Node *t1, *t2;
-    t1 = *head1;
-    t2 = *head2;
-    for (int i = 0; i <= p; i++)
-    {
-        Node *newNode;
-        newNode = (Node *)malloc(sizeof(Node));
-        newNode->power = i;
-        newNode->next = NULL;
-        int data1 = t1 == NULL ? 0 : t1->data;
-        int data2 = t2 == NULL ? 0 : t2->data;
-        newNode->data = data1 + data2;
-        if (head3 == NULL)
+        Node *head3 = NULL, *tail3 = NULL;
+        int p = power2 > power1 ? power2 : power1;
+        if (power1 == power2)
+            p = power1;
+        Node *t1, *t2;
+        t1 = *head1;
+        t2 = *head2;
+        for (int i = 0; i <= p; i++)
         {
-            head3 = newNode;
+            Node *newNode;
+            newNode = (Node *)malloc(sizeof(Node));
+            newNode->power = i;
+            newNode->next = NULL;
+            int data1 = t1 == NULL ? 0 : t1->data;
+            int data2 = t2 == NULL ? 0 : t2->data;
+            newNode->data = data1 + data2;
+            if (head3 == NULL)
+            {
+                head3 = newNode;
+            }
+            else
+            {
+                tail3->next = newNode;
+            }
+
+            tail3 = newNode;
+
+            if (t1 != NULL)
+                t1 = t1->next;
+
+            if (t2 != NULL)
+                t2 = t2->next;
         }
-        else
-        {
-            tail3->next = newNode;
-        }
 
-        tail3 = newNode;
-
-        if (t1 != NULL)
-            t1 = t1->next;
-
-        if (t2 != NULL)
-            t2 = t2->next;
+        printPol(head3);
     }
-
-    printPol(head3);
-    }else if(*head1==NULL)
+    else if (*head1 == NULL)
     {
         printf("Printing the polynomial");
         printPol(*head2);
-
     }
-    else if(*head2==NULL)
+    else if (*head2 == NULL)
     {
         printf("Printing the polynomial");
         printPol(*head1);
-
     }
     else
     {
@@ -124,43 +123,42 @@ void addPol(Node **head1, Node **head2, int power1, int power2)
     }
 }
 
-
 // subtract 2 polynomials
-void subPol(Node **head1, Node **head2,int power1, int power2)
+void subPol(Node **head1, Node **head2, int power1, int power2)
 {
-    if(*head1!=NULL && *head2!=NULL)
+    if (*head1 != NULL && *head2 != NULL)
     {
-    printf("\nSubtracting the polynomials\n");
-    Node *head3 = NULL, *tail3 = NULL;
-    int p = power2 > power1 ? power2 : power1;
-    if (power1 == power2)
-        p = power1;
-    Node *t1, *t2;
-    t1 = *head1;
-    t2 = *head2;
-    for (int i = 0; i <= p; i++)
-    {
-        Node *newNode;
-        newNode = (Node *)malloc(sizeof(Node));
-        int data1 = t1 == NULL ? 0 : (t1->data);
-        int data2 = t2 == NULL ? 0 : (t2->data);
-        newNode->data = data1 - data2;
-        newNode->power = i;
-        newNode->next = NULL;
-        if (head3 == NULL)
-            head3 = newNode;
-        else
-            tail3->next = newNode;
+        printf("\nSubtracting the polynomials\n");
+        Node *head3 = NULL, *tail3 = NULL;
+        int p = power2 > power1 ? power2 : power1;
+        if (power1 == power2)
+            p = power1;
+        Node *t1, *t2;
+        t1 = *head1;
+        t2 = *head2;
+        for (int i = 0; i <= p; i++)
+        {
+            Node *newNode;
+            newNode = (Node *)malloc(sizeof(Node));
+            int data1 = t1 == NULL ? 0 : (t1->data);
+            int data2 = t2 == NULL ? 0 : (t2->data);
+            newNode->data = data1 - data2;
+            newNode->power = i;
+            newNode->next = NULL;
+            if (head3 == NULL)
+                head3 = newNode;
+            else
+                tail3->next = newNode;
 
-        tail3 = newNode;
-        if (t1 != NULL)
-            t1 = t1->next;
+            tail3 = newNode;
+            if (t1 != NULL)
+                t1 = t1->next;
 
-        if (t2 != NULL)
-            t2 = t2->next;
-   }
+            if (t2 != NULL)
+                t2 = t2->next;
+        }
 
-   printPol(head3);
+        printPol(head3);
     }
     else if (*head1 == NULL)
     {
@@ -176,21 +174,21 @@ void subPol(Node **head1, Node **head2,int power1, int power2)
     {
         printf("Can't subtract the polynomials");
     }
-   
 }
 
 void main()
 {
+    printf("\n..Polynomial using linked list...\n");
     int power1, power2;
     printf("\nEnter the highest order of the first polynomial : ");
-    scanf("%d",&power1);
+    scanf("%d", &power1);
     Node *head1 = NULL, *tail1 = NULL, *head2 = NULL, *tail2 = NULL;
-    createPol(&head1,&tail1,power1);
+    createPol(&head1, &tail1, power1);
     printPol(head1);
     printf("\nEnter the highest order of the second polynomial : ");
     scanf("%d", &power2);
-    createPol(&head2,&tail2,power2);
+    createPol(&head2, &tail2, power2);
     printPol(head2);
-    addPol(&head1,&head2,power1,power2);
-    subPol(&head1,&head2,power1,power2);
+    addPol(&head1, &head2, power1, power2);
+    subPol(&head1, &head2, power1, power2);
 }

@@ -63,9 +63,19 @@ void MergeSort(int a[],int lb, int ub)
 
 void main()
 {
-    int a[] ={15,5,24,8,1,3,16,10,20};
-    MergeSort(a,0,8);
-    for(int i=0;i<=8;i++)
+    int n;
+    printf("Enter the size of the array : ");
+    scanf("%d",&n);
+    printf("Enter the values in the array : \n");
+    int a[n];
+    for (int i = 0; i <n; i++)
+    {
+        printf("Enter value at index = %d\n", i);
+        scanf("%d",&a[i]);
+    }
+    MergeSort(a,0,n);
+    printf("\nSorting in ascending order using merge sort\n");
+    for(int i=0;i<n;i++)
     {
         printf("%d ",a[i]);
     }
