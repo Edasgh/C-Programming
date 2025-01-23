@@ -37,29 +37,34 @@ void mergeSort(int arr[], int n)
 }
 
 /* Function to merge the two haves arr[l..m] and arr[m+1..r] of array arr[] */
-void merge(int a[], int l, int m, int u)
+void merge(int a[], int lb, int mid, int ub)
 {
-    int i=l,j=m+1,k=0;
-    int b[u+1];
+    int i = lb, j = mid + 1, k = lb;
+    int b[ub + 1];
 
-    while(i<=m && j<=u)
+    while (i <= mid && j <= ub)
     {
-      b[k++] = a[i] < a[j] ? a[i++] : a[j++];
+        b[k++] = a[i] < a[j] ? a[i++] : a[j++];
     }
 
-    if(i>m)
+    if (i > mid)
     {
-        while(j<=u)
+        while (j <= ub)
         {
             b[k++] = a[j++];
         }
     }
-    else if(j>u)
+    else if (j > ub)
     {
-        while(i<=m)
+        while (i <= mid)
         {
             b[k++] = a[i++];
         }
+    }
+
+    for (int c = lb; c <= ub; c++)
+    {
+        a[c] = b[c];
     }
 }
 
