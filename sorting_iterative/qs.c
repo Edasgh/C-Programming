@@ -1,74 +1,67 @@
 // An iterative implementation of quick sort
 #include <stdio.h>
-
-// A utility function to swap two elements
-void swap(int *a, int *b)
-{
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
-
+#include <stdlib.h>
 /* This function is same in both iterative and recursive*/
-int partition(int arr[], int l, int h)
+int partition(int a[], int lb, int ub)
 {
-    int x = arr[h];
-    int i = (l - 1);
-
-    for (int j = l; j <= h - 1; j++)
+    int pivot = a[lb], start = lb, end = ub;
+    while (start < end)
     {
-        if (arr[j] <= x)
+        while (a[start] <= pivot)
+            start++;
+        while (a[end] > pivot)
+            end--;
+        if (start < end)
         {
-            i++;
-            swap(&arr[i], &arr[j]);
+            int t = a[start];
+            a[start] = a[end];
+            a[end] = t;
         }
     }
-    swap(&arr[i + 1], &arr[h]);
-    return (i + 1);
+
+    int t = a[lb];
+    a[lb] = a[end];
+    a[end] = t;
+    return end;
 }
 
-/* A[] --> Array to be sorted,
-l --> Starting index,
-h --> Ending index */
-void quickSortIterative(int arr[], int l, int h)
+void quickSortIterative(int a[], int lb, int ub)
 {
-    // Create an auxiliary stack
-    int stack[h - l + 1];
-
-    // initialize top of stack
+    // Create an explicit stack
+    int *stack = (int *)malloc(sizeof(int) * (ub - lb + 1));
     int top = -1;
 
-    // push initial values of l and h to stack
-    stack[++top] = l;
-    stack[++top] = h;
+    // Push the initial bounds of the array
+    stack[++top] = lb;
+    stack[++top] = ub;
 
-    // Keep popping from stack while is not empty
+    // Keep processing the stack until it is empty
     while (top >= 0)
     {
-        // Pop h and l
-        h = stack[top--];
-        l = stack[top--];
+        // Pop the upper and lower bounds
+        ub = stack[top--];
+        lb = stack[top--];
 
-        // Set pivot element at its correct position
-        // in sorted array
-        int p = partition(arr, l, h);
+        // Partition the array and get the pivot index
+        int loc = partition(a, lb, ub);
 
-        // If there are elements on left side of pivot,
-        // then push left side to stack
-        if (p - 1 > l)
+        // Push the left side of the partition to the stack
+        if (loc - 1 > lb)
         {
-            stack[++top] = l;
-            stack[++top] = p - 1;
+            stack[++top] = lb;
+            stack[++top] = loc - 1;
         }
 
-        // If there are elements on right side of pivot,
-        // then push right side to stack
-        if (p + 1 < h)
+        // Push the right side of the partition to the stack
+        if (loc + 1 < ub)
         {
-            stack[++top] = p + 1;
-            stack[++top] = h;
+            stack[++top] = loc + 1;
+            stack[++top] = ub;
         }
     }
+
+    // Free the stack memory
+    free(stack);
 }
 
 // A utility function to print contents of arr
