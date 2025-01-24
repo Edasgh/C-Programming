@@ -92,10 +92,10 @@ void main()
 
 3. **Memory Management**: I’ve used `malloc` to allocate memory for the stack and `free` it once we're done. 
 
+---
+
+
 This iterative approach effectively removes the need for recursion, while still sorting the array in the same way.
-
-
-Let's go through the program step by step to understand how the **Iterative QuickSort** works.
 
 ---
 
@@ -216,5 +216,3 @@ For the input array `{10, 15, 1, 2, 9, 6, 11}`, the output will be:
 1. **Explicit Stack**: Replaces recursion, simulating the process of dividing the array into smaller subarrays.
 2. **Partitioning**: Rearranges the array into two parts, with the pivot in its correct position.
 3. **Efficiency**: This approach eliminates the risk of stack overflow caused by too many recursive calls.
-
-Let me know if you'd like clarification on any specific part!

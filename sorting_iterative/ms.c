@@ -3,7 +3,36 @@
 #include <stdio.h>
 
 /* Function to merge the two haves arr[l..m] and arr[m+1..r] of array arr[] */
-void merge(int arr[], int l, int m, int r);
+void merge(int a[], int lb, int mid, int ub)
+{
+    int i = lb, j = mid + 1, k = lb;
+    int b[ub + 1];
+
+    while (i <= mid && j <= ub)
+    {
+        b[k++] = a[i] < a[j] ? a[i++] : a[j++];
+    }
+
+    if (i > mid)
+    {
+        while (j <= ub)
+        {
+            b[k++] = a[j++];
+        }
+    }
+    else if (j > ub)
+    {
+        while (i <= mid)
+        {
+            b[k++] = a[i++];
+        }
+    }
+
+    for (int c = lb; c <= ub; c++)
+    {
+        a[c] = b[c];
+    }
+}
 
 // Utility function to find minimum of two integers
 int min(int x, int y) { return (x < y) ? x : y; }
@@ -36,37 +65,6 @@ void mergeSort(int arr[], int n)
     }
 }
 
-/* Function to merge the two haves arr[l..m] and arr[m+1..r] of array arr[] */
-void merge(int a[], int lb, int mid, int ub)
-{
-    int i = lb, j = mid + 1, k = lb;
-    int b[ub + 1];
-
-    while (i <= mid && j <= ub)
-    {
-        b[k++] = a[i] < a[j] ? a[i++] : a[j++];
-    }
-
-    if (i > mid)
-    {
-        while (j <= ub)
-        {
-            b[k++] = a[j++];
-        }
-    }
-    else if (j > ub)
-    {
-        while (i <= mid)
-        {
-            b[k++] = a[i++];
-        }
-    }
-
-    for (int c = lb; c <= ub; c++)
-    {
-        a[c] = b[c];
-    }
-}
 
 /* Function to print an array */
 void printArray(int A[], int size)
@@ -78,17 +76,24 @@ void printArray(int A[], int size)
 }
 
 /* Driver program to test above functions */
-int main()
+void main()
 {
-    int arr[] = {12, 11, 13, 5, 6, 7};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    printf("Given array is \n");
+    int n;
+    printf("Enter the maximum size of the array : ");
+    scanf("%d",&n);
+    int arr[n];
+    printf("Now enter the array elements : \n");
+    for(int i=0;i<n;i++)
+    {
+        printf("Enter the value at index = %d : ",i);
+        scanf("%d",&arr[i]);
+    }
+   
+    printf("The given array is \n");
     printArray(arr, n);
 
     mergeSort(arr, n);
 
-    printf("\nSorted array is \n");
+    printf("\nThe sorted array (ascending order) is \n");
     printArray(arr, n);
-    return 0;
 }

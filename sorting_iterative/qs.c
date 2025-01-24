@@ -28,7 +28,7 @@ int partition(int a[], int lb, int ub)
 void quickSortIterative(int a[], int lb, int ub)
 {
     // Create an explicit stack
-    int *stack = (int *)malloc(sizeof(int) * (ub - lb + 1));
+    int stack[(ub-lb)+1];
     int top = -1;
 
     // Push the initial bounds of the array
@@ -59,25 +59,32 @@ void quickSortIterative(int a[], int lb, int ub)
             stack[++top] = ub;
         }
     }
-
-    // Free the stack memory
-    free(stack);
 }
 
 // A utility function to print contents of arr
 void printArr(int arr[], int n)
 {
-    int i;
-    for (i = 0; i < n; ++i)
+    printf("\nPrinting the array\n");
+    for (int i = 0; i < n; i++)
         printf("%d ", arr[i]);
 }
 
 // Driver program to test above functions
-int main()
+void main()
 {
-    int arr[] = {4, 3, 5, 2, 1, 3, 2, 3};
-    int n = sizeof(arr) / sizeof(*arr);
-    quickSortIterative(arr, 0, n - 1);
-    printArr(arr, n);
-    return 0;
+   int n;
+   printf("Enter the maximum size of the array : ");
+   scanf("%d",&n);
+   int arr[n];
+   printf("Enter the values of the array : \n");
+   for(int i=0;i<n;i++)
+   {
+    printf("Enter the value at index = %d : ",i);
+    scanf("%d",&arr[i]);
+   }
+   printArr(arr, n);
+   quickSortIterative(arr, 0, n - 1);
+   printf("\nThe sorted array (ascending order ) :\n");
+   printArr(arr, n);
+    
 }
