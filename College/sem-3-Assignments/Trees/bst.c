@@ -213,7 +213,7 @@ void delFromBST(int n, Node **root)
     }
 }
 
-void inorder(Node *root)
+void inorderIterative(Node *root)
 {
     if (root == NULL)
     {
@@ -241,7 +241,7 @@ void inorder(Node *root)
     }
 }
 
-void preorder(Node *root)
+void preorderIterative(Node *root)
 {
     if (root == NULL)
     {
@@ -270,7 +270,7 @@ void preorder(Node *root)
     }
 }
 
-void postorder(Node *root)
+void postorderIterative(Node *root)
 {
     if (root == NULL)
     {
@@ -391,6 +391,156 @@ void countNodes(Node *root)
     printf("\nThe total no. of leaf nodes is %d & the total no. of non leaf nodes is %d\n", leafNodes, nonLeafNodes);
 }
 
+void inorderRecursive(Node *root)
+{
+    if (root == NULL)
+        return;
+
+    inorderRecursive(root->left);
+    printf("%d ", root->data);
+    inorderRecursive(root->right);
+}
+
+void preorderRecursive(Node *root)
+{
+    if (root == NULL)
+        return;
+
+    printf("%d ", root->data);
+    preorderRecursive(root->left);
+    preorderRecursive(root->right);
+}
+
+void postOrderRecursive(Node *root)
+{
+    if (root == NULL)
+        return;
+
+    postOrderRecursive(root->left);
+    postOrderRecursive(root->right);
+    printf("%d ", root->data);
+}
+
+void inorder(Node *root)
+{
+    int ch;
+    printf("\nSelect : \n 1. Inorder Iterative traversal, \n2. Inorder Recursive Traversal \n Select : ");
+    scanf("%d", &ch);
+    switch (ch)
+    {
+    case 1:
+
+    {
+        printf("\nInorder Iterative Traversal\n");
+        inorderIterative(root);
+        break;
+    }
+    case 2:
+
+    {
+        printf("\nInorder Recursive Traversal\n");
+        inorderRecursive(root);
+        break;
+    }
+
+    default:
+        printf("Invalid option!\n");
+        break;
+    }
+}
+void preorder(Node *root)
+{
+    int ch;
+    printf("\nSelect : \n 1. Preorder Iterative traversal, \n2. Preorder Recursive Traversal \n Select : ");
+    scanf("%d", &ch);
+    switch (ch)
+    {
+    case 1:
+
+    {
+        printf("\nPreorder Iterative Traversal\n");
+        preorderIterative(root);
+        break;
+    }
+    case 2:
+
+    {
+        printf("\nPreorder Recursive Traversal\n");
+        preorderRecursive(root);
+        break;
+    }
+
+    default:
+        printf("Invalid option!\n");
+        break;
+    }
+}
+void postorder(Node *root)
+{
+    int ch;
+    printf("\nSelect : \n 1. Postorder Iterative traversal, \n2. Postorder Recursive Traversal \n Select : ");
+    scanf("%d", &ch);
+    switch (ch)
+    {
+    case 1:
+
+    {
+        printf("\nPostorder Iterative Traversal\n");
+        postorderIterative(root);
+        break;
+    }
+    case 2:
+
+    {
+        printf("\nPostorder Recursive Traversal\n");
+        postOrderRecursive(root);
+        break;
+    }
+
+    default:
+        printf("Invalid option!\n");
+        break;
+    }
+}
+
+void getHeightOfBST(Node *root)
+{
+    if(root==NULL)
+    {
+        printf("The BST is empty\n");
+        return;
+    }
+
+    Node *queue[100];
+    int front = 0 ,rear = 0;
+    int height=0;
+    queue[rear++] = root;
+    queue[rear++] = NULL;
+
+    while(front<rear)
+    {
+        Node *t = queue[front++];
+        if(t==NULL){
+            height++;
+            if(front<rear)
+                queue[rear++] = NULL;
+        }else{
+            if(t->left!=NULL) queue[rear++] = t->left;
+
+            if(t->right!=NULL) queue[rear++] = t->right;
+        }
+
+
+
+    }
+
+    printf("\nHeight of the BST is %d\n",height);
+
+
+
+
+}
+
 void main()
 {
     int n;
@@ -410,7 +560,7 @@ void main()
     int ch;
     while (1)
     {
-        printf("\nSelect an option to perform : \n1.Insert into BST, \n2. Delete a value from BST, \n3. Search a value in  BST,\n4.preorder traversal, \n5. postorder traversal, \n6. inorder traversal,\n7. level order traversal, \n8. Mirror Image of BST, \n9. Count the leaves and non-leaves,\n10. exit \nSelect : ");
+        printf("\nSelect an option to perform : \n1.Insert into BST, \n2. Delete a value from BST, \n3. Search a value in  BST,\n4.preorder traversal, \n5. postorder traversal, \n6. inorder traversal,\n7. level order traversal, \n8. Mirror Image of BST, \n9. Count the leaves and non-leaves,\n10. Print the height of the BST, \n11. exit, \nSelect : ");
         scanf("%d", &ch);
         switch (ch)
         {
@@ -465,6 +615,9 @@ void main()
             countNodes(root);
             break;
         case 10:
+            getHeightOfBST(root);
+            break;
+        case 11:
             exit(0);
             break;
 
