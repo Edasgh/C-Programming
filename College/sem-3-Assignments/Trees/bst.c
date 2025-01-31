@@ -194,20 +194,20 @@ void delFromBST(int n, Node **root)
     // Case 3: Two children
     else
     {
-        Node *successorParent = curr;
+        Node *sParent = curr;
         Node *successor = curr->right;
         while (successor->left != NULL)
         {
-            successorParent = successor;
+            sParent = successor;
             successor = successor->left;
         }
 
         curr->data = successor->data;
 
-        if (successorParent->left == successor)
-            successorParent->left = successor->right;
+        if (sParent->left == successor)
+            sParent->left = successor->right;
         else
-            successorParent->right = successor->right;
+            sParent->right = successor->right;
 
         free(successor);
     }
