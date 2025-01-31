@@ -309,7 +309,8 @@ void postorderIterative(Node *root)
     } while (top != -1);
 }
 
-void levelOrder(Node *root)
+
+void levelOrderIterative(Node *root)
 {
     if (root == NULL)
     {
@@ -330,6 +331,62 @@ void levelOrder(Node *root)
             queue[rear++] = t->left;
         if (t->right != NULL)
             queue[rear++] = t->right;
+    }
+}
+
+// Function to find the height of the tree
+int height(Node *root)
+{
+    if (root == NULL)
+        return 0;
+    int leftHeight = height(root->left);
+    int rightHeight = height(root->right);
+    return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
+}
+
+
+
+// Print nodes at a given level
+void printLevel(Node *root, int level)
+{
+    if (root == NULL)
+        return;
+    if (level == 1)
+        printf("%d ", root->data);
+    else if (level > 1)
+    {
+        printLevel(root->left, level - 1);
+        printLevel(root->right, level - 1);
+    }
+}
+
+// Level order traversal (recursive)
+void levelOrderRecursive(Node *root)
+{
+    int h = height(root);
+    for (int i = 1; i <= h; i++)
+        printLevel(root, i);
+}
+
+void levelOrder(Node *root)
+{
+    int ch;
+    printf("\nSelect :\n1. Iterative Level order traversal,\n2.Recursive level order traversal\nSelect : ");
+    scanf("%d",&ch);
+
+    switch (ch)
+    {
+    case 1:
+        levelOrderIterative(root);
+        break;
+    
+    case 2:
+        levelOrderRecursive(root);
+        break;
+    
+    default:
+    printf("\nInvalid option\n");
+        break;
     }
 }
 
