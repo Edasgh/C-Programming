@@ -17,23 +17,6 @@ Node *create(int num)
     return new;
 }
 
-Node *getMinNode(Node *n1, Node *n2)
-{
-    if (n1 == NULL)
-        return n2;
-    if (n2 == NULL)
-        return n1;
-    return n1->data < n2->data ? n1 : n2;
-}
-Node *getMaxNode(Node *n1, Node *n2)
-{
-    if (n1 == NULL)
-        return n2;
-    if (n2 == NULL)
-        return n1;
-    return n1->data > n2->data ? n1 : n2;
-}
-
 void createBST(int a[], int n, Node **root)
 {
     int i = 0;
