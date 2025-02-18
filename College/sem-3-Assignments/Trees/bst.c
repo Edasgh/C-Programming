@@ -293,29 +293,29 @@ void postorderIterative(Node *root)
 }
 
 
-void levelOrderIterative(Node *root)
-{
-    if (root == NULL)
-    {
-        printf("The BST is empty\n");
-        return;
-    }
+// void levelOrderIterative(Node *root)
+// {
+//     if (root == NULL)
+//     {
+//         printf("The BST is empty\n");
+//         return;
+//     }
 
-    Node *queue[100];
-    int front = 0, rear = 0;
-    queue[rear++] = root;
+//     Node *queue[100];
+//     int front = 0, rear = 0;
+//     queue[rear++] = root;
 
-    while (front < rear)
-    {
-        Node *t = queue[front++];
-        printf("%d ", t->data);
+//     while (front < rear)
+//     {
+//         Node *t = queue[front++];
+//         printf("%d ", t->data);
 
-        if (t->left != NULL)
-            queue[rear++] = t->left;
-        if (t->right != NULL)
-            queue[rear++] = t->right;
-    }
-}
+//         if (t->left != NULL)
+//             queue[rear++] = t->left;
+//         if (t->right != NULL)
+//             queue[rear++] = t->right;
+//     }
+// }
 
 // Function to find the height of the tree
 int height(Node *root)
@@ -351,27 +351,6 @@ void levelOrderRecursive(Node *root)
         printLevel(root, i);
 }
 
-void levelOrder(Node *root)
-{
-    int ch;
-    printf("\nSelect :\n1. Iterative Level order traversal,\n2.Recursive level order traversal\nSelect : ");
-    scanf("%d",&ch);
-
-    switch (ch)
-    {
-    case 1:
-        levelOrderIterative(root);
-        break;
-    
-    case 2:
-        levelOrderRecursive(root);
-        break;
-    
-    default:
-    printf("\nInvalid option\n");
-        break;
-    }
-}
 
 void mirrorImg(Node *root)
 {
@@ -543,43 +522,43 @@ void postorder(Node *root)
     }
 }
 
-void getHeightOfBST(Node *root)
-{
-    if(root==NULL)
-    {
-        printf("The BST is empty\n");
-        return;
-    }
+// void getHeightOfBST(Node *root)
+// {
+//     if(root==NULL)
+//     {
+//         printf("The BST is empty\n");
+//         return;
+//     }
 
-    Node *queue[100];
-    int front = 0 ,rear = 0;
-    int height=0;
-    queue[rear++] = root;
-    queue[rear++] = NULL;
+//     Node *queue[100];
+//     int front = 0 ,rear = 0;
+//     int height=0;
+//     queue[rear++] = root;
+//     queue[rear++] = NULL;
 
-    while(front<rear)
-    {
-        Node *t = queue[front++];
-        if(t==NULL){
-            height++;
-            if(front<rear)
-                queue[rear++] = NULL;
-        }else{
-            if(t->left!=NULL) queue[rear++] = t->left;
+//     while(front<rear)
+//     {
+//         Node *t = queue[front++];
+//         if(t==NULL){
+//             height++;
+//             if(front<rear)
+//                 queue[rear++] = NULL;
+//         }else{
+//             if(t->left!=NULL) queue[rear++] = t->left;
 
-            if(t->right!=NULL) queue[rear++] = t->right;
-        }
-
-
-
-    }
-
-    printf("\nHeight of the BST is %d\n",height);
+//             if(t->right!=NULL) queue[rear++] = t->right;
+//         }
 
 
 
+//     }
 
-}
+//     printf("\nHeight of the BST is %d\n",height);
+
+
+
+
+// }
 
 void main()
 {
@@ -642,7 +621,7 @@ void main()
             inorder(root);
             break;
         case 7:
-            levelOrder(root);
+            levelOrderRecursive(root);
             break;
         case 8:
         {
@@ -655,8 +634,11 @@ void main()
             countNodes(root);
             break;
         case 10:
-            getHeightOfBST(root);
-            break;
+            {
+                int heightOfBST = height(root);
+                printf("\nThe height of the BST is : %d\n",heightOfBST);
+                break;
+            }
         case 11:
             exit(0);
             break;
