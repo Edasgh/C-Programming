@@ -32,7 +32,7 @@ void heapSort(int a[], int n)
         maxHeapify(a, n, i);
     }
 
-    // Heap Sort
+    // deletion
     for (int i = n - 1; i > 0; i--)
     {
         int temp = a[0];
