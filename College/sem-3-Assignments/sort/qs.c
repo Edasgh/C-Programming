@@ -24,6 +24,7 @@ int Partition(int a[], int lb, int ub)
     }
 
     // Place the pivot in its correct position
+    // swap a[lb] & a[end] 
     int t = a[lb];
     a[lb] = a[end];
     a[end] = t;
